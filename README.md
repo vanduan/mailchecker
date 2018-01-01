@@ -7,6 +7,9 @@
 # INSTALL PACKAGES:
 	run file install_packages.bat
 	
+      ...>pip install validate_email
+      ...>pip install pyDNS"
+	
 # USAGE: 
 
 >mchecker.py -h
