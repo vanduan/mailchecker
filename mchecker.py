@@ -102,7 +102,7 @@ def from_file():
         e = f.readline().replace('\n','').replace('\r','')
         if not e:
             break
-        t = threading.Thread(target=verify, args=(email,data['fileout'],))
+        t = threading.Thread(target=verify, args=(e,data['fileout'],))
         t.start()
         time.sleep(data['time'])
 
@@ -126,6 +126,7 @@ def run_check():
         verify(data['email'], data['fileout'])
     elif data['filein']:
         from_file()
+        
     print "\n   \\\\\\\\\    DONE    /////"
     print "       Success",data['success'],"/",data['count']
 def main():
