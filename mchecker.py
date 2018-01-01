@@ -102,7 +102,9 @@ def from_file():
         e = f.readline().replace('\n','').replace('\r','')
         if not e:
             break
-        verify(e,data['fileout'])
+        t = threading.Thread(target=verify, args=(email,data['fileout'],))
+        t.start()
+        time.sleep(data['time'])
 
 def run_check():
     if data['bru']:
