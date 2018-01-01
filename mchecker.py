@@ -77,7 +77,7 @@ def verify(email,fileout=''):
     if fileout:
         try:
             # write to file
-            f = open(fileout,'w+')
+            f = open(fileout,'a+')
             if validate_email(email,verify=True):
                 data['success']+=1
                 f.write("[+] verify " + str(email) + " >>> Success <<<\n")
@@ -126,9 +126,7 @@ def run_check():
         verify(data['email'], data['fileout'])
     elif data['filein']:
         from_file()
-        
-    print "\n   \\\\\\\\\    DONE    /////"
-    print "       Success",data['success'],"/",data['count']
+
 def main():
     try:
         opts, args = getopt.getopt(sys.argv[1:], 'e:i:o:t:c:b:h')

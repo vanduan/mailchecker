@@ -77,7 +77,7 @@ def verify(email,fileout=''):
     if fileout:
         try:
             # write to file
-            f = open(fileout,'w+')
+            f = open(fileout,'a+')
             if validate_email(email,verify=True):
                 data['success']+=1
                 f.write("[+] verify " + str(email) + " >>> Success <<<\n")
@@ -102,12 +102,14 @@ def from_file():
         e = f.readline().replace('\n','').replace('\r','')
         if not e:
             break
-        verify(e,data['fileout'])
+        t = threading.Thread(target=verify, args=(e,data['fileout'],))
+        t.start()
+        time.sleep(data['time'])
 
 def run_check():
     if data['bru']:
         # bruteforce email
-        if re.findall('\?+',data['bru']):
+        if not re.findall('\?+',data['bru']):
             print '   Error >>> not find ? in email partent'
             sys.exit(0)
         else:
@@ -124,8 +126,7 @@ def run_check():
         verify(data['email'], data['fileout'])
     elif data['filein']:
         from_file()
-    print "\n   \\\\\\\\\    DONE    /////"
-    print "       Success",data['success'],"/",data['count']
+
 def main():
     try:
         opts, args = getopt.getopt(sys.argv[1:], 'e:i:o:t:c:b:h')
