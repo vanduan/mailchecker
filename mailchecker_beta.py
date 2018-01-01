@@ -128,7 +128,7 @@ def run_check():
     print "       Success",data['success'],"/",data['count']
 def main():
     try:
-        opts, args = getopt.getopt(sys.argv[1:], 'e:i:o:t:c:bh')
+        opts, args = getopt.getopt(sys.argv[1:], 'e:i:o:t:c:b:h')
     except getopt.error, msg:
         sys.stdout = sys.stderr
         print msg
